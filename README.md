@@ -34,7 +34,7 @@ Expected: Switch 1 connected, flows cleared2️⃣ Terminal 2: Deploy NetworkBas
 3️⃣ Terminal 3: Monitor FlowsBashwatch -n 1 "sudo ovs-ofctl dump-flows s1"
 
 🧪 Validation TestsRespond to Mininet CLI:Bashmininet> pingall
-# Result: All hosts discoverable (0% packet loss within zones)
+ Result: All hosts discoverable (0% packet loss within zones)
 
 mininet> h1 ping h3     # User → App ✅ Expected: 0% loss
 mininet> h1 ping h5     # User → DB ❌ Expected: 100% loss + SECURITY BLOCK log
@@ -60,9 +60,9 @@ Switch 1 connected, flows cleared
 mininet> h6 nmap -sS 10.1.0.1        # DMZ reconnaissance → BLOCKED
 mininet> h1 ssh h5                   # User SSH to database → CONNECTION TIMEOUT
 
-# Verify dropped flows
+ Verify dropped flows
 mininet> sh ovs-ofctl dump-flows s1 | grep DROP
-# Output: priority=200,dl_src=00:00:00:01:00:00,dl_dst=00:00:00:05:00:00 actions=[]
+Output: priority=200,dl_src=00:00:00:01:00:00,dl_dst=00:00:00:05:00:00 actions=[]
 
 
 📊 Performance MetricsMetricResultBlocked unauthorized flows100% cross-zone violations preventedAllowed business traffic100% false-negative-freeARP discovery100% success rateFlow installation time< 1 second (reactive)Logging granularityEvery security decision with MAC addressesScalability8 hosts → easily 50+📁 File StructurePlaintextsdn-security-lab/
@@ -93,7 +93,7 @@ Enterprise-grade compatibility.
 Audit capability: Full visibility into security decisions.Vendor-neutral: Open SDN standard (no proprietary lock-in).
 
 📄 PrerequisitesBash# Mininet VM (prebuilt) - https://mininet.org/download/
-# VirtualBox or VMware Workstation
+ VirtualBox or VMware Workstation
 
 sudo apt update
 sudo apt install -y ryu-manager openvswitch-switch
