@@ -9,11 +9,17 @@ Features an 8-host multi-zone topology with explicit allow-list policies and rea
 
 * 🏗️ ArchitecturePlaintextInternet
   
+
+ 
  Internet ←── DMZ Zone (Web, Mail, VPN) ──┐
                                         │
                           SDN Firewall (s1) ──┼───> Users Zone
                                         │         │
                                         └─────────> App Zone → Database Zone
+
+
+
+
 
 🌐 Security Zones
 | Zone | Hosts | IP Range | Purpose |
