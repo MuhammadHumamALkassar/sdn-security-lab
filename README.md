@@ -1,6 +1,14 @@
-🔐 Enterprise SDN Security Lab - Zero Trust Micro-Segmentation⭐ If you find this project useful, please give it a ⭐ on GitHub!🎯 Project OverviewProduction-grade Software-Defined Networking (SDN) security demonstrator implementing Zero Trust micro-segmentation for enterprise architectures. Features an 8-host multi-zone topology with explicit allow-list policies and real-time monitoring.Built with:
+🔐 Enterprise SDN Security Lab - Zero Trust Micro-Segmentation
+⭐ If you find this project useful, please give it a ⭐on GitHub!🎯 
+Project OverviewProduction-grade Software-Defined Networking (SDN) security demonstrator implementing Zero Trust micro-segmentation for enterprise architectures.
+
+Features an 8-host multi-zone topology with explicit allow-list policies and real-time monitoring.Built with:
+
+
 * Mininet + Open vSwitch (kernel-native)Ryu ControllerOpenFlow 1.3
-* 🏗️ ArchitecturePlaintextInternet 
+
+* 🏗️ ArchitecturePlaintextInternet
+  
  Internet ←── DMZ Zone (Web, Mail, VPN) ──┐
                                         │
                           SDN Firewall (s1) ──┼───> Users Zone
@@ -36,7 +44,11 @@ Controller Output Example:Plaintextloading app /home/mininet/dmz_controller.py
 Switch 1 connected, flows cleared
 *** SECURITY BLOCK: 00:00:00:01:00:00 -> 00:00:00:05:00:00 ***
 * SECURITY BLOCK: 00:00:00:07:00:00 -> 00:00:00:05:00:00 *
-🔬 Engineering Highlights🆔 MAC-Based Identity SystemUnlike dynamic IP addresses, MAC addresses provide immutable device fingerprinting:Resists ARP spoofing attacksPools DHCP IP rotationStable identity for policy enforcementProduction compatibility: Mininet --mac flag
+
+
+🔬 Engineering Highlights
+
+🆔 MAC-Based Identity SystemUnlike dynamic IP addresses, MAC addresses provide immutable device fingerprinting:Resists ARP spoofing attacksPools DHCP IP rotationStable identity for policy enforcementProduction compatibility: Mininet --mac flag
 
 🚦 Flow Priority HierarchyARP: 250 (fast-path host discovery)Policy: 100-200 (security enforcement)Table-miss: 0 (controller inspection)
 
@@ -51,6 +63,8 @@ mininet> h1 ssh h5                   # User SSH to database → CONNECTION TIMEO
 # Verify dropped flows
 mininet> sh ovs-ofctl dump-flows s1 | grep DROP
 # Output: priority=200,dl_src=00:00:00:01:00:00,dl_dst=00:00:00:05:00:00 actions=[]
+
+
 📊 Performance MetricsMetricResultBlocked unauthorized flows100% cross-zone violations preventedAllowed business traffic100% false-negative-freeARP discovery100% success rateFlow installation time< 1 second (reactive)Logging granularityEvery security decision with MAC addressesScalability8 hosts → easily 50+📁 File StructurePlaintextsdn-security-lab/
 ├── README.md                  # This documentation
 ├── controller/
@@ -68,17 +82,51 @@ mininet> sh ovs-ofctl dump-flows s1 | grep DROP
 │   └── requirements.txt       # Ryū framework dependencies
 └── tests/
     └── validation_suite.md    # Test case documentation
+
+
 🏆 Why This Design?
+
 ⚙️ Technical ExcellenceKernel-native Open vSwitch: Production performance (not userspace).Single enforcement point (s1): Simplified policy management.Persistent DROP flows: Attack prevention without re-learning.Production OpenFlow 1.3:
 Enterprise-grade compatibility.
+
 💼 Business ImpactPrevents lateral movement: h1 → h5 blocked even if compromised.Enables legitimate workflows: DMZ → Apps for public services.
 Audit capability: Full visibility into security decisions.Vendor-neutral: Open SDN standard (no proprietary lock-in).
+
 📄 PrerequisitesBash# Mininet VM (prebuilt) - https://mininet.org/download/
 # VirtualBox or VMware Workstation
 
 sudo apt update
 sudo apt install -y ryu-manager openvswitch-switch
+
 🎓 Learning OutcomesAfter
 completing this project, you'll understand:Zero Trust micro-segmentation in SDN.OpenFlow 1.3 flow table management.MAC-based identity vs dynamic IP.Production firewall controller development.Multi-zone enterprise security models.Live flow monitoring 
+
 📚 Additional ResourcesMininet: mininet.orgRyū Framework: osrg.github.io/ryuOpenFlow Spec: opennetworking.orgZero Trust Architecture: NIST SP 800-207
+
+
 🤝 ContributingThis is an educational project for portfolio demonstration. Feel free to fork, modify, and extend for your own learning.
+
+
+
+
+
+### 1. Network Connectivity Test (All hosts discoverable)
+Attack Blocked
+
+<img width="1878" height="926" alt="run" src="https://github.com/user-attachments/assets/1385fc83-9dab-45d4-8e71-c892fabdbbba" />
+
+
+### 2. Live Flow Table (Real-time monitoring)
+<img width="871" height="76" alt="monitor" src="https://github.com/user-attachments/assets/f4358070-6da0-4e31-b1e7-2c2cc9411380" />
+
+
+### 4. Architecture Diagram
+
+
+<img width="1408" height="768" alt="arch" src="https://github.com/user-attachments/assets/7df5f376-c7fa-4713-9628-0eb21718a0d5" />
+
+
+
+
+
+
