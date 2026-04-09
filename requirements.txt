@@ -1,0 +1,7 @@
+ryu>=4.34
+mininet>=2.3.0
+openvswitch>=2.13.0
+eventlet>=0.30.0
+greenlet>=0.4.15
+webob>=1.8.0
+dnspython>=1.16.0
